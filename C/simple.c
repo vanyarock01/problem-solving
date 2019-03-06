@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
-#include <math.h.>
+#include <math.h>
 
 int* two_sum(int* nums, int numsSize, int target)
 {
@@ -46,7 +46,7 @@ int binary_gap(int N)
     return distance;
 }
 
-
+// TODO
 // https://leetcode.com/problems/buddy-strings/
 bool buddy_strings(char* A, char* B)
 {
@@ -85,14 +85,32 @@ bool buddy_strings(char* A, char* B)
     return true;
 }
 
+// https://leetcode.com/problems/isomorphic-strings/
+bool is_isomorphic(char* s, char* t)
+{
+    char scounter['~' + 1] = {0};
+    char tcounter['~' + 1] = {0};
+
+    for (int i = 0; s[i] != '\0'; i++) {
+        if (scounter[s[i]] == 0 && tcounter[t[i]] == 0) {
+            scounter[s[i]] = t[i];
+            tcounter[t[i]] = s[i];
+        } else 
+        if (scounter[s[i]] == t[i] && tcounter[t[i]] == s[i]) {
+            continue;
+        } else {
+            return false;
+        }
+    }
+    return true;
+}
+
+
 int main(int argc, char const *argv[])
 {
     char A[64], B[64];
     scanf("%s", A);
     scanf("%s", B);
-    for (int i = 0; A[i] != '\0'; i++) {
-        printf("%c\n", A[i]);
-    }
-    printf("%s",  buddy_strings(A, B) ? "true" : "false");  
+    printf("%s",  is_isomorphic(A, B) ? "true" : "false");  
     return 0;
 }
